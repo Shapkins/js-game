@@ -313,8 +313,3 @@ class Player extends Actor {
   }
 
 }
-
-const time = 5;
-const coin = new Coin();
-coin.act(time);
-console.log(coin)
