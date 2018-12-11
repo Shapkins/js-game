@@ -55,16 +55,7 @@ class Actor {
     if (movingActor === this) {
       return false;
     }
-    if (((this.left > movingActor.left) && (this.left < movingActor.right)) || ((this.right < movingActor.right) && (this.right > movingActor.left)) || ((this.top > movingActor.top) && (this.top < movingActor.bottom)) || ((this.bottom < movingActor.bottom) && (this.bottom > movingActor.top))) {
-      return true;
-    }
-    if ((this.right === movingActor.right) && (this.left === movingActor.left) && (this.top === movingActor.top) && (this.bottom === movingActor.bottom)) {
-      return true;
-    }
-    if ((this.right > movingActor.right) && (this.left < movingActor.left) && (this.top < movingActor.top) && (this.bottom > movingActor.bottom)) {
-      return true;
-    }
-    return false;
+    return ((this.left < movingActor.right) && (this.right > movingActor.left) && (this.top < movingActor.bottom) && (this.bottom > movingActor.top));
   }
 }
 
@@ -295,3 +286,29 @@ class Player extends Actor {
   }
 
 }
+
+const schemas = [
+  [
+    ' v                ',
+    '                  ',
+    '                  ',
+    '            v     ',
+    '    v             ',
+    ' o                ',
+    ' x          o     ',
+    ' x         xxxxx  ',
+    ' x@               ',
+    ' xxxxx            ',
+    '     x!!!!!!!!!!!!',
+    '     xxxxxxxxxxxxx',
+    '                  ',
+  ],
+];
+const actorDict = {
+  '@': Player,
+  'v': FireRain,
+  'o': Coin
+}
+const parser = new LevelParser(actorDict);
+runGame(schemas, parser, DOMDisplay)
+  .then(() => alert("Вы выиграли приз!"));
