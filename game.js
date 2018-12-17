@@ -127,13 +127,15 @@ class Level {
   }
 
   playerTouched(obstacleType = '', movingActor) {
-    if ((obstacleType === 'lava') || (obstacleType === 'fireball')) {
-      this.status = 'lost';
-    }
-    if (obstacleType === 'coin') {
-      this.removeActor(movingActor);
-      if (this.noMoreActors('coin')) {
-        this.status = 'won';
+    if (this.status === null) {
+      if ((obstacleType === 'lava') || (obstacleType === 'fireball')) {
+        this.status = 'lost';
+      }
+      if (obstacleType === 'coin') {
+        this.removeActor(movingActor);
+        if (this.noMoreActors('coin')) {
+          this.status = 'won';
+        }
       }
     }
   }
